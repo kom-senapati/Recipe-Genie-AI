@@ -3,10 +3,25 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-const Search = ({ handleSearchFocus, handleSearchBlur, isFocused }) => {
+const Search = ({
+  handleSearchFocus,
+  handleBlur,
+  showResults,
+  setShowResults,
+}) => {
   const [input, setInput] = useState("");
   const [meals, setMeals] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const resultsRef = useRef(null);
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (input) {
+      fetchMeals(input);
+    } else {
+      setMeals([]);
+    }
+  }, [input]);
 
   const fetchMeals = (value) => {
     fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${value}`)
@@ -24,8 +39,35 @@ const Search = ({ handleSearchFocus, handleSearchBlur, isFocused }) => {
   };
 
   const handleKeyDown = (event) => {
-    if (event.key === "Escape") {
+    if (event.key === "ArrowDown") {
+      setActiveIndex((prev) => {
+        const newIndex = prev < meals.length - 1 ? prev + 1 : prev;
+        scrollIntoView(newIndex);
+        return newIndex;
+      });
+    } else if (event.key === "ArrowUp") {
+      setActiveIndex((prev) => {
+        const newIndex = prev > 0 ? prev - 1 : prev;
+        scrollIntoView(newIndex);
+        return newIndex;
+      });
+    } else if (event.key === "Enter" && activeIndex >= 0) {
+      window.location.href = `/meal/${meals[activeIndex].idMeal}`;
+    } else if (event.key === "Escape") {
+      setShowResults(false);
       inputRef.current.blur();
+    }
+  };
+
+  const scrollIntoView = (index) => {
+    if (resultsRef.current) {
+      const resultItems = resultsRef.current.children;
+      if (resultItems[index]) {
+        resultItems[index].scrollIntoView({
+          block: "nearest",
+          behavior: "smooth",
+        });
+      }
     }
   };
 
@@ -34,10 +76,10 @@ const Search = ({ handleSearchFocus, handleSearchBlur, isFocused }) => {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [meals, activeIndex]);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col relative">
       <label className="input input-bordered flex items-center gap-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -52,14 +94,18 @@ const Search = ({ handleSearchFocus, handleSearchBlur, isFocused }) => {
           />
         </svg>
         <input
+          ref={inputRef}
           type="text"
           className="grow"
           placeholder="Search for your meal"
           value={input}
-          onChange={(e) => handleSearch(e.target.value)}
+          onChange={(e) => {
+            handleSearch(e.target.value);
+            setShowResults(true);
+          }}
+          onKeyDown={handleKeyDown}
           onFocus={handleSearchFocus}
-          onBlur={handleSearchBlur}
-          ref={inputRef}
+          onBlur={handleBlur}
         />
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -78,20 +124,34 @@ const Search = ({ handleSearchFocus, handleSearchBlur, isFocused }) => {
         </svg>
       </label>
 
-      {meals && meals.length !== 0 && (
-        <div className="w-80 max-h-80 overflow-y-scroll no-scrollbar bg-neutral p-2 rounded-xl flex flex-col gap-2 absolute top-32 md:top-20 md:right-0 z-10">
-          {meals.map((meal) => (
-            <Link key={meal.idMeal} href={`/meal/${meal.idMeal}`}>
-              <div className="hover:bg-base-100 p-1 rounded-xl flex items-center justify-start gap-3">
-                <img
-                  src={meal.strMealThumb}
-                  alt={meal.strMeal}
-                  className="w-10 h-10 rounded-full"
-                />
-                <span>{meal.strMeal}</span>
-              </div>
-            </Link>
-          ))}
+      {showResults && input && (
+        <div
+          ref={resultsRef}
+          className="w-80 max-h-80 overflow-y-scroll no-scrollbar bg-neutral p-2 rounded-xl flex flex-col gap-2 absolute top-12 md:top-20 md:right-0 z-10"
+        >
+          {input &&
+            meals &&
+            meals.map((meal, index) => (
+              <Link key={meal.idMeal} href={`/meal/${meal.idMeal}`}>
+                <div
+                  className={`${
+                    index === activeIndex ? "bg-base-100" : ""
+                  } p-1 rounded-xl flex items-center justify-start gap-3`}
+                  onMouseEnter={() => setActiveIndex(index)}
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    window.location.href = `/meal/${meal.idMeal}`;
+                  }}
+                >
+                  <img
+                    src={meal.strMealThumb}
+                    alt={meal.strMeal}
+                    className="w-10 h-10 rounded-full"
+                  />
+                  <span>{meal.strMeal}</span>
+                </div>
+              </Link>
+            ))}
         </div>
       )}
     </div>

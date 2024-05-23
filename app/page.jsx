@@ -6,13 +6,16 @@ import Search from "@/components/search";
 
 function page() {
   const [categories, setCategories] = useState([]);
-  const [isSearching, setIsSearching] = useState(false);
+  const [showResults, setShowResults] = useState(false);
+
   const handleSearchFocus = () => {
-    setIsSearching(true);
+    setShowResults(true);
   };
 
-  const handleSearchBlur = () => {
-    setIsSearching(false);
+  const handleBlur = () => {
+    setTimeout(() => {
+      setShowResults(false);
+    }, 200);
   };
 
   useEffect(() => {
@@ -33,15 +36,16 @@ function page() {
           <a className="btn btn-ghost text-xl">🍱 Recipe Genie</a>
         </div>
         <Search
-          handleSearchBlur={handleSearchBlur}
+          handleBlur={handleBlur}
           handleSearchFocus={handleSearchFocus}
-          isFocused={isSearching}
+          showResults={showResults}
+          setShowResults={setShowResults}
         />
       </div>
 
       <div
         className={`flex flex-col items-center justify-center p-5 md:p-10 w-full bg-base-300 ${
-          !isSearching ? "opacity-100" : "opacity-80 blur-sm"
+          !showResults ? "opacity-100" : "opacity-80 blur-sm"
         }`}
       >
         <h1 className="text-xl md:text-3xl text-primary mb-10">
