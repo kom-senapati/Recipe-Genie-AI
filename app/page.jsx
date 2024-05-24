@@ -1,8 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { act, useEffect, useState } from "react";
 import Link from "next/link";
 import Search from "@/components/search";
+import { ShepherdJourneyProvider, useShepherd } from "react-shepherd";
+
+const tourOptions = {
+  defaultStepOptions: {
+    cancelIcon: {
+      enabled: true,
+    },
+  },
+  useModalOverlay: true,
+};
 
 function page() {
   const [categories, setCategories] = useState([]);
@@ -29,10 +39,121 @@ function page() {
       });
   }, []);
 
+  function StartTour() {
+    const shepherd = useShepherd();
+    const tour = new shepherd.Tour({
+      ...tourOptions,
+      useModalOverlay: true,
+      defaultStepOptions: {
+        scrollTo: true,
+        classes: "shadow-lg p-5 bg-base-100",
+      },
+    });
+    const Steps = [
+      {
+        id: "intro",
+        attachTo: { element: "#main", on: "bottom" },
+        buttons: [
+          {
+            classes: "btn btn-error",
+            text: "Exit",
+            action() {
+              return this.cancel();
+            },
+          },
+          {
+            classes: "btn btn-success",
+            text: "Next",
+            action() {
+              return this.next();
+            },
+          },
+        ],
+        title: "Welcome to Recipe Genie",
+        text: [
+          "Recipe Genie is a fantastic website to find recipes for your favorite meals.",
+        ],
+      },
+      {
+        id: "search",
+        attachTo: { element: "#searchBar", on: "bottom" },
+        buttons: [
+          {
+            classes: "btn btn-error",
+            text: "Exit",
+            action() {
+              return this.cancel();
+            },
+          },
+          {
+            classes: "btn btn-success",
+            text: "Next",
+            action() {
+              return this.next();
+            },
+          },
+        ],
+        title: "Search",
+        text: ["Search for your favorite meal and find the recipe."],
+      },
+      {
+        id: "random",
+        attachTo: { element: "#randomMeal", on: "bottom" },
+        buttons: [
+          {
+            classes: "btn btn-error",
+            text: "Exit",
+            action() {
+              return this.cancel();
+            },
+          },
+          {
+            classes: "btn btn-success",
+            text: "Next",
+            action() {
+              return this.next();
+            },
+          },
+        ],
+        title: "Random Meal",
+        text: ["Get a random meal recipe."],
+      },
+      {
+        id: "categories",
+        attachTo: { element: ".categories", on: "bottom" },
+        buttons: [
+          {
+            classes: "btn btn-error",
+            text: "Exit",
+            action() {
+              return this.cancel();
+            },
+          },
+          {
+            classes: "btn btn-success",
+            text: "Next",
+            action() {
+              return this.next();
+            },
+          },
+        ],
+        title: "Categories",
+        text: ["Explore diverse categories for your perfect meal."],
+      },
+    ];
+    tour.addSteps(Steps);
+
+    return (
+      <button className="btn btn-sm btn-secondary" onClick={tour.start}>
+        Start Tour {"->"}
+      </button>
+    );
+  }
+
   return (
-    <>
-      <div className="navbar bg-base-100 flex flex-col md:flex-row">
-        <div className="flex-1">
+    <ShepherdJourneyProvider>
+      <div className="navbar bg-base-300 flex flex-col md:flex-row">
+        <div id="main" className="flex-1">
           <a className="btn btn-ghost text-xl">🍱 Recipe Genie</a>
         </div>
         <Search
@@ -44,18 +165,25 @@ function page() {
       </div>
 
       <div
-        className={`flex flex-col items-center justify-center p-5 md:p-10 w-full bg-base-300 ${
+        className={`flex flex-col items-center justify-center p-5 md:p-10 w-full bg-base-200 ${
           !showResults ? "opacity-100" : "opacity-80 blur-sm"
         }`}
       >
-        <h1 className="text-xl md:text-3xl text-primary mb-10">
+        <h1 className="text-lg md:text-xl mb-2">
+          Click on the below button to start the tour and explore the website.
+        </h1>
+        <StartTour />
+
+        <h1 className="text-xl md:text-3xl text-primary mb-2 mt-5">
           Start Your Food Adventure
         </h1>
         <Link href="/random">
-          <button className="btn btn-primary">Enjoy a Surprise Meal</button>
+          <button id="randomMeal" className="btn btn-primary">
+            Enjoy a Surprise Meal
+          </button>
         </Link>
         <div className="divider">OR</div>
-        <h1 className="text-xl md:text-2xl text-primary mb-10">
+        <h1 className="categories text-xl md:text-2xl text-primary mb-10">
           Explore Diverse Categories for Your Perfect Meal
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -82,7 +210,7 @@ function page() {
           ))}
         </div>
       </div>
-    </>
+    </ShepherdJourneyProvider>
   );
 }
 export default page;
