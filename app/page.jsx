@@ -209,6 +209,12 @@ function page() {
               🎲 Enjoy a Surprise Meal
             </button>
           </Link>
+
+          <Link href="/ai">
+            <button id="randomMeal" class="mt-5 btn btn-secondary text-lg md:text-xl">
+              🤖 Generate meal by AI
+            </button>
+          </Link>
         </div>
 
         <div className="divider"></div>
