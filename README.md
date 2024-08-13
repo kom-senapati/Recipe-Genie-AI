@@ -1,6 +1,6 @@
 # **Recipe Genie**
 
-![Recipe-Genie](https://socialify.git.ci/kom-senapati/Recipe-Genie/image?font=KoHo&name=1&owner=1&pattern=Diagonal%20Stripes&theme=Light)
+![Recipe-Genie](https://socialify.git.ci/kom-senapati/Recipe-Genie-AI/image?font=KoHo&name=1&owner=1&pattern=Diagonal%20Stripes&theme=Light)
 
 # **Description:**
 Recipe Genie is your ultimate cooking companion powered by MealsDB and enhanced with AI. Discover a world of culinary delights, from tantalizing surprises to exploring categories and their delectable recipes. With Recipe Genie, embark on a culinary journey like never before.
