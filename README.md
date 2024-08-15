@@ -33,6 +33,7 @@ Recipe Genie is your ultimate cooking companion powered by MealsDB and enhanced 
 
 # **Demo Video:**
 [![YouTube](http://i.ytimg.com/vi/evX0CTucSA4/hqdefault.jpg)](https://www.youtube.com/watch?v=evX0CTucSA4)
+[![YouTube](http://i.ytimg.com/vi/7FRv7A6-9m8/hqdefault.jpg)](https://www.youtube.com/watch?v=7FRv7A6-9m8)
 
 # **Getting Started:**
 To get started with Recipe Genie:
