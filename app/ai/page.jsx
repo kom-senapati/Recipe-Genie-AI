@@ -4,6 +4,10 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
+const SpeechRecognition =
+  typeof window !== "undefined" &&
+  (window.SpeechRecognition || window.webkitSpeechRecognition);
+
 function RecipeForm() {
   const router = useRouter();
 
@@ -281,16 +285,118 @@ function CheckboxField({ label, name, options, register }) {
 }
 
 function InputField({ label, name, register }) {
+  const [inputValue, setInputValue] = useState("");
+  const [isListening, setIsListening] = useState(false);
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleClearInput = () => {
+    setInputValue("");
+  };
+
+  const startListening = () => {
+    if (SpeechRecognition) {
+      const recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = "en-US";
+
+      recognition.onstart = () => {
+        setIsListening(true);
+      };
+
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        setInputValue(transcript);
+        setIsListening(false);
+      };
+
+      recognition.onend = () => {
+        setIsListening(false);
+      };
+
+      recognition.onerror = (event) => {
+        console.error("Speech recognition error:", event.error);
+        setIsListening(false);
+      };
+
+      recognition.start();
+    } else {
+      alert("Speech recognition is not supported in your browser.");
+    }
+  };
+
   return (
     <div className="form-control mb-4">
       <label className="label">
         <span className="label-text">{label}</span>
       </label>
-      <input
-        type="text"
-        {...register(name)}
-        className="input input-bordered w-full"
-      />
+      <div className="relative w-full">
+        <input
+          type="text"
+          {...register(name)}
+          value={inputValue}
+          onChange={handleInputChange}
+          className="input input-bordered w-full pr-16" // Increased padding for buttons
+        />
+
+        <button
+          type="button"
+          onClick={startListening}
+          className={`absolute top-1/2 right-12 transform -translate-y-1/2 btn btn-circle btn-sm ${isListening ? "btn-secondary" : "btn-primary"
+            }`}
+          disabled={isListening}
+        >
+          {isListening ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#d31212"
+                d="M8 6h8c1.1 0 2 .9 2 2v8c0 1.1-.9 2-2 2H8c-1.1 0-2-.9-2-2V8c0-1.1.9-2 2-2"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="white"
+                d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3m5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72z"
+              />
+            </svg>
+          )}
+        </button>
+
+        <button
+          type="button"
+          onClick={handleClearInput}
+          className="absolute top-1/2 right-2 transform -translate-y-1/2 btn btn-circle btn-sm btn-error"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="w-4 h-4"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
     </div>
   );
 }
