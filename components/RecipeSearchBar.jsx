@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { SearchIcon, X } from "@/components/Icons";
 
-const Search = ({
+const RecipeSearchBar = ({
   handleSearchFocus,
   handleBlur,
   showResults,
@@ -81,18 +82,7 @@ const Search = ({
   return (
     <div id="searchBar" className="flex flex-col relative">
       <label className="input input-bordered flex items-center gap-2">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 16 16"
-          fill="currentColor"
-          className="w-4 h-4 opacity-70"
-        >
-          <path
-            fillRule="evenodd"
-            d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-            clipRule="evenodd"
-          />
-        </svg>
+        <SearchIcon />
         <input
           ref={inputRef}
           type="text"
@@ -107,21 +97,7 @@ const Search = ({
           onFocus={handleSearchFocus}
           onBlur={handleBlur}
         />
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          className="w-4 h-4 cursor-pointer"
-          stroke="currentColor"
-          onClick={() => handleSearch("")}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
+        <X />
       </label>
 
       {showResults && input && (
@@ -134,9 +110,8 @@ const Search = ({
             meals.map((meal, index) => (
               <Link key={meal.idMeal} href={`/meal/${meal.idMeal}`}>
                 <div
-                  className={`${
-                    index === activeIndex ? "bg-base-100" : ""
-                  } p-1 rounded-xl flex items-center justify-start gap-3`}
+                  className={`${index === activeIndex ? "bg-base-100" : ""
+                    } p-1 rounded-xl flex items-center justify-start gap-3`}
                   onMouseEnter={() => setActiveIndex(index)}
                   onMouseDown={(e) => {
                     e.preventDefault();
@@ -157,4 +132,4 @@ const Search = ({
     </div>
   );
 };
-export default Search;
+export default RecipeSearchBar;
