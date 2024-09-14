@@ -12,7 +12,7 @@ function RecipeForm() {
       dishType: "Snack",
       cuisine: "Indian",
       dietaryRestrictions: [],
-      spiceLevel: "Spicy",
+      spiceLevel: "Spicy"
     },
   });
 
@@ -158,34 +158,38 @@ function RecipeForm() {
           onSubmit={handleSubmit(onSubmit)}
           className="w-full max-w-xl p-6 bg-base-100 rounded-lg shadow-xl"
         >
-          <SelectField
-            label="Type of Dish:"
-            name="dishType"
-            options={[
-              "",
-              "Appetizer",
-              "Main Course",
-              "Dessert",
-              "Snack",
-              "Beverage",
-            ]}
-            register={register}
-          />
+          <InputField label="Describe about dish:" name="userPrompt" register={register} />
 
-          <SelectField
-            label="Cuisine Preference:"
-            name="cuisine"
-            options={[
-              "",
-              "Italian",
-              "Mexican",
-              "Indian",
-              "Chinese",
-              "American",
-              "Mediterranean",
-            ]}
-            register={register}
-          />
+          <div className="flex w-full justify-between">
+            <SelectField
+              label="Type of Dish:"
+              name="dishType"
+              options={[
+                "",
+                "Appetizer",
+                "Main Course",
+                "Dessert",
+                "Snack",
+                "Beverage",
+              ]}
+              register={register}
+            />
+
+            <SelectField
+              label="Cuisine Preference:"
+              name="cuisine"
+              options={[
+                "",
+                "Italian",
+                "Mexican",
+                "Indian",
+                "Chinese",
+                "American",
+                "Mediterranean",
+              ]}
+              register={register}
+            />
+          </div>
 
           <CheckboxField
             label="Dietary Restrictions:"
@@ -197,7 +201,6 @@ function RecipeForm() {
               "Dairy-Free",
               "Nut-Free",
               "Halal",
-              "Kosher",
             ]}
             register={register}
           />
@@ -236,7 +239,7 @@ function RecipeForm() {
 
 function SelectField({ label, name, options, register }) {
   return (
-    <div className="form-control mb-4">
+    <div className="form-control mb-4 min-w-64">
       <label className="label">
         <span className="label-text">{label}</span>
       </label>
@@ -273,6 +276,21 @@ function CheckboxField({ label, name, options, register }) {
           </label>
         ))}
       </div>
+    </div>
+  );
+}
+
+function InputField({ label, name, register }) {
+  return (
+    <div className="form-control mb-4">
+      <label className="label">
+        <span className="label-text">{label}</span>
+      </label>
+      <input
+        type="text"
+        {...register(name)}
+        className="input input-bordered w-full"
+      />
     </div>
   );
 }
