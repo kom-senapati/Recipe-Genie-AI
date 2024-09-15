@@ -3,6 +3,15 @@
 import { useEffect, useState } from "react";
 import { PauseIcon, PlayIcon, ResumeIcon, StopIcon } from "./Icons";
 
+/**
+ * The TextToSpeech component provides text-to-speech functionality with play, pause, and stop controls.
+ *
+ * - Plays the provided text using the browser's speech synthesis.
+ * - Allows pausing and resuming the speech.
+ * - Stops the speech when requested.
+ *
+ * @param {string} text - The text to be converted to speech.
+ */
 const TextToSpeech = ({ text }) => {
   const [isPaused, setIsPaused] = useState(false);
   const [utterance, setUtterance] = useState(null);

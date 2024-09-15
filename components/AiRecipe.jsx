@@ -1,6 +1,14 @@
 import { PlusIcon2, PlusIcon3 } from "@/components/Icons";
 import TextToSpeech from "./TextToSpeech";
 
+/**
+ * The AiRecipe component displays a detailed view of a recipe.
+ *
+ * - Shows the recipe name, area, and category.
+ * - Lists the ingredients and their amounts.
+ * - Provides the cooking instructions.
+ * - Includes a button to close the recipe view.
+ */
 export default function AiRecipe({ recipe, setShowRecipe }) {
   return (
     <div className="max-w-96 md:max-w-7xl w-full bg-base-200 text-base-content shadow-md rounded-lg overflow-hidden">

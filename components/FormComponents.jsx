@@ -50,6 +50,17 @@ export function CheckboxField({ label, name, options, register }) {
   );
 }
 
+/**
+ * The InputField component provides a text input field with speech recognition and clear functionality.
+ *
+ * - Displays a label and an input field.
+ * - Allows users to input text manually or via speech recognition.
+ * - Provides buttons to start speech recognition and clear the input field.
+ *
+ * @param {string} label - The label for the input field.
+ * @param {string} name - The name attribute for the input field.
+ * @param {Function} register - The register function for form handling.
+ */
 export function InputField({ label, name, register }) {
   const [inputValue, setInputValue] = useState("");
   const [isListening, setIsListening] = useState(false);

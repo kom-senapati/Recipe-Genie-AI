@@ -7,6 +7,16 @@ import {
   SelectField,
 } from "@/components/FormComponents";
 
+/**
+ * The GenerateRecipeForm component provides a form for users to input details to generate a recipe.
+ *
+ * - Allows users to describe the dish.
+ * - Lets users select the type of dish, cuisine preference, dietary restrictions, and spice level.
+ * - Submits the form data to generate a recipe and displays it.
+ *
+ * @param {Function} setRecipe - Function to set the generated recipe.
+ * @param {Function} setShowRecipe - Function to show the generated recipe.
+ */
 function GenerateRecipeForm({ setRecipe, setShowRecipe }) {
 
   const { register, handleSubmit } = useForm({

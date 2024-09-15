@@ -5,6 +5,13 @@ import BackButton from "@/components/BackButton";
 import GenerateRecipeForm from "@/components/GenerateRecipeForm";
 import { useState } from "react";
 
+/**
+ * The Page component manages the state and display of a recipe generation form and the generated recipe.
+ *
+ * - Shows a form to generate a recipe.
+ * - Displays the generated recipe when available.
+ * - Provides buttons to clear the recipe or view it.
+ */
 function Page() {
   const [recipe, setRecipe] = useState(null);
   const [showRecipe, setShowRecipe] = useState(false);
