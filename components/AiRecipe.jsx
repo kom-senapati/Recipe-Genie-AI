@@ -1,4 +1,5 @@
 import { PlusIcon2, PlusIcon3 } from "@/components/Icons";
+import TextToSpeech from "./TextToSpeech";
 
 export default function AiRecipe({ recipe, setShowRecipe }) {
   return (
@@ -45,6 +46,7 @@ export default function AiRecipe({ recipe, setShowRecipe }) {
             Instructions
           </h2>
           <p className="text-base-content">{recipe.steps.join("\n")}</p>
+          <TextToSpeech text={recipe.steps.join(" ")} />
         </div>
       </div>
     </div>

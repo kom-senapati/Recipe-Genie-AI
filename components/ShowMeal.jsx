@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import BackButton from "@/components/BackButton";
 import { PlusIcon } from "@/components/Icons";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import TextToSpeech from "./TextToSpeech";
 
 function ShowMeal({ URL }) {
     const [mealData, setMealData] = useState(null);
@@ -74,6 +75,7 @@ function ShowMeal({ URL }) {
                                 <span className="ml-2">Instructions</span>
                             </h2>
                             <p className="text-base-content">{mealData.strInstructions}</p>
+                            <TextToSpeech text={mealData.strInstructions} />
                         </div>
                         {mealData.strYoutube && (
                             <Link
