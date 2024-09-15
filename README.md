@@ -1,39 +1,41 @@
-# **Recipe Genie**
+# **Recipe Genie AI**
 
-![Recipe-Genie](https://socialify.git.ci/kom-senapati/Recipe-Genie-AI/image?font=KoHo&name=1&owner=1&pattern=Diagonal%20Stripes&theme=Light)
+![Recipe-Genie-AI](https://socialify.git.ci/kom-senapati/Recipe-Genie-AI/image?font=KoHo&name=1&owner=1&pattern=Diagonal%20Stripes&theme=Light)
 
 # **Description:**
 Recipe Genie is your ultimate cooking companion powered by MealsDB and enhanced with AI. Discover a world of culinary delights, from tantalizing surprises to exploring categories and their delectable recipes. With Recipe Genie, embark on a culinary journey like never before.
 
 # **Tech Stack:**
-- ![Next.js](https://img.shields.io/badge/-Next.js-000?style=flat&logo=next.js)
-- ![DaisyUI](https://img.shields.io/badge/-DaisyUI-000?style=flat&logo=tailwindcss)
-- ![Tailwind CSS](https://img.shields.io/badge/-Tailwind_CSS-000?style=flat&logo=tailwindcss)
-- ![Shepherd.js](https://img.shields.io/badge/-Shepherd.js-000?style=flat)
-- ![Vercel AI SDK](https://img.shields.io/badge/-Vercel_AI_SDK-000?style=flat)
+- Next JS
+- Tailwind, DaisyUI
+- Groq, Vercel AI SDK
 
 # **Features:**
 - **Enjoy a Surprise Meal:** Let Recipe Genie surprise you with a random, mouth-watering meal suggestion.
 - **Explore Categories and Meals:** Dive into various culinary categories and discover a plethora of recipes waiting to be cooked.
-- **AI-Generated Recipes:** Generate unique recipes with AI, leveraging the powerful Mixtral 8x7b model via Groq's API.
-- **Guided Tour:** Take a custom-styled tour of the main page using Shepherd.js to enhance your user experience.
+- **Text-to-Speech (TTS)**: Reads recipe instructions aloud for hands-free cooking.
+- **AI-Generated Recipes:** Generate unique recipes with AI, leveraging the powerful Meta Llama 3 8B model via Groq's API.
 
 <details>
 <summary><h1><b>Screenshots:</b></h1></summary>
 
-![image](https://github.com/kom-senapati/Recipe-Genie/assets/92045934/b552388c-889a-4bec-b93d-b24a1756c8d3)
+![image](https://github.com/user-attachments/assets/db74ab9c-1623-43ac-a38f-897e368388b4)
 
-![image](https://github.com/kom-senapati/Recipe-Genie/assets/92045934/45a03eb5-fbc5-4799-997e-e86b4700e890)
+**Meals DB**
 
-![image](https://github.com/kom-senapati/Recipe-Genie/assets/92045934/719b69d6-5c9c-4150-ade4-fc761a90f609)
+![image](https://github.com/user-attachments/assets/10a0fbfe-7f66-4794-8bdc-35ee1f3396e4)
 
-![image](https://github.com/user-attachments/assets/e7a1ab54-6403-47de-9322-1cda2d0756f6)
+![image](https://github.com/user-attachments/assets/44aa9cb0-d995-4bd5-a9d3-0cc67e46bc28)
+
+![image](https://github.com/user-attachments/assets/7b1b7ef8-0156-42d7-a555-fa2048a1e266)
+
+**AI Generated Recipe**
+
+![image](https://github.com/user-attachments/assets/0ef9dc4d-3e3f-4177-a1fb-cca10cb9852f)
+
+![image](https://github.com/user-attachments/assets/f348c5cc-26d6-4602-9621-d1aa2f11a468)
 
 </details>
-
-# **Demo Video:**
-[![YouTube](http://i.ytimg.com/vi/evX0CTucSA4/hqdefault.jpg)](https://www.youtube.com/watch?v=evX0CTucSA4)
-[![YouTube](http://i.ytimg.com/vi/7FRv7A6-9m8/hqdefault.jpg)](https://www.youtube.com/watch?v=7FRv7A6-9m8)
 
 # **Getting Started:**
 To get started with Recipe Genie:
