@@ -14,7 +14,7 @@ Recipe Genie is your ultimate cooking companion powered by MealsDB and enhanced 
 - **Enjoy a Surprise Meal:** Let Recipe Genie surprise you with a random, mouth-watering meal suggestion.
 - **Explore Categories and Meals:** Dive into various culinary categories and discover a plethora of recipes waiting to be cooked.
 - **Text-to-Speech (TTS)**: Reads recipe instructions aloud for hands-free cooking.
-- **AI-Generated Recipes:** Generate unique recipes with AI, leveraging the powerful Meta Llama 3 8B model via Groq's API.
+- **AI-Generated Recipes:** Craft unique recipes and generate striking images using AI, utilizing the Meta Llama 3 8B model via Groq's API and Pollinations.ai for image creation.
 
 <details>
 <summary><h1><b>Screenshots:</b></h1></summary>
@@ -31,9 +31,9 @@ Recipe Genie is your ultimate cooking companion powered by MealsDB and enhanced 
 
 **AI Generated Recipe**
 
-![image](https://github.com/user-attachments/assets/0ef9dc4d-3e3f-4177-a1fb-cca10cb9852f)
+![image](https://github.com/user-attachments/assets/d1dc9f85-c9e2-4ed1-b83e-6087f04e2ded)
 
-![image](https://github.com/user-attachments/assets/f348c5cc-26d6-4602-9621-d1aa2f11a468)
+![image](https://github.com/user-attachments/assets/c6b269fa-cb81-4c21-b129-778e9e8650fa)
 
 </details>
 
