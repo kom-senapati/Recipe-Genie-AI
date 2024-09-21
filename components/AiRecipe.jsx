@@ -1,4 +1,4 @@
-import { PlusIcon2, PlusIcon3 } from "@/components/Icons";
+import { PlusIcon2, PlusIcon } from "@/components/Icons";
 import TextToSpeech from "./TextToSpeech";
 
 /**
@@ -9,7 +9,7 @@ import TextToSpeech from "./TextToSpeech";
  * - Provides the cooking instructions.
  * - Includes a button to close the recipe view.
  */
-export default function AiRecipe({ recipe, setShowRecipe }) {
+export default function AiRecipe({ recipe, setShowRecipe, recipeImageUrl }) {
   return (
     <div className="max-w-96 md:max-w-7xl w-full bg-base-200 text-base-content shadow-md rounded-lg overflow-hidden">
       <button
@@ -22,31 +22,36 @@ export default function AiRecipe({ recipe, setShowRecipe }) {
         <h1 className="text-3xl md:text-4xl text-center font-bold text-primary mb-4">
           {recipe.name} 🍲
         </h1>
-        <div className="flex items-center space-x-4 mb-4">
-          <span className="badge badge-primary flex items-center">
-            <PlusIcon3 />
-            {recipe.area}
-          </span>
-          <span className="badge badge-success flex items-center">
-            <PlusIcon3 />
-            {recipe.category}
-          </span>
-        </div>
-        <div>
-          <h2 className="text-xl text-neutral-content font-semibold mb-2 flex items-center">
-            <PlusIcon2 />
-            Ingredients
-          </h2>
-          <table className="w-full mb-4">
-            <tbody>
-              {recipe.ingredients.map(({ name, amount }, index) => (
-                <tr key={index}>
-                  <td className="py-1 pr-4">{name}</td>
-                  <td className="py-1">{amount}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="flex flex-col md:flex-row gap-10">
+          <div>
+            {recipeImageUrl && (
+              <img
+                src={recipeImageUrl}
+                alt={recipe.name}
+                className="max-w-72 md:max-w-xl h-auto rounded-lg mb-4"
+              />
+            )}
+            <div className="flex items-center space-x-4 mb-4">
+              <span className="badge badge-primary">{recipe.area}</span>
+              <span className="badge badge-success">{recipe.category}</span>
+            </div>
+          </div>
+          <div>
+            <h2 className="text-xl text-neutral-content font-semibold mb-2 flex items-center">
+              <PlusIcon />
+              <span className="ml-2">Ingredients</span>
+            </h2>
+            <table className="w-full mb-4">
+              <tbody>
+                {recipe.ingredients.map(({ name, amount }, index) => (
+                  <tr key={index}>
+                    <td className="py-1 pr-4">{name}</td>
+                    <td className="py-1">{amount}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
         <div className="mb-4">
           <h2 className="text-xl text-neutral-content font-semibold mb-2 flex items-center">

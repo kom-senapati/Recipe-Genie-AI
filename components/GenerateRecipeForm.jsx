@@ -17,8 +17,7 @@ import {
  * @param {Function} setRecipe - Function to set the generated recipe.
  * @param {Function} setShowRecipe - Function to show the generated recipe.
  */
-function GenerateRecipeForm({ setRecipe, setShowRecipe }) {
-
+function GenerateRecipeForm({ setRecipe, setShowRecipe, setRecipeImageUrl }) {
   const { register, handleSubmit } = useForm({
     defaultValues: {
       dishType: "Snack",
@@ -39,6 +38,17 @@ function GenerateRecipeForm({ setRecipe, setShowRecipe }) {
 
     const recipe = await res.json();
     setRecipe(recipe.recipe);
+
+    const imagePrompt = await `${data.userPrompt}, ${recipe.recipe.name}`;
+    const resImage = await fetch("/api/generate-recipe-image", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt: imagePrompt }),
+    });
+    setRecipeImageUrl((await resImage.json()).url);
+
     setShowRecipe(true);
   };
 

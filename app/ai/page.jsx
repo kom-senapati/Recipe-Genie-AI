@@ -14,6 +14,7 @@ import { useState } from "react";
  */
 function Page() {
   const [recipe, setRecipe] = useState(null);
+  const [recipeImageUrl, setRecipeImageUrl] = useState(null);
   const [showRecipe, setShowRecipe] = useState(false);
 
   const handleReset = () => {
@@ -26,11 +27,16 @@ function Page() {
       <BackButton />
 
       {showRecipe && recipe ? (
-        <AiRecipe recipe={recipe} setShowRecipe={setShowRecipe} />
+        <AiRecipe
+          recipe={recipe}
+          recipeImageUrl={recipeImageUrl}
+          setShowRecipe={setShowRecipe}
+        />
       ) : (
         <GenerateRecipeForm
           setRecipe={setRecipe}
           setShowRecipe={setShowRecipe}
+          setRecipeImageUrl={setRecipeImageUrl}
         />
       )}
 
